@@ -13,6 +13,9 @@ def remove_comments(java_code):
 
     return java_code
 
+#インデントと空白だけ削除
+def remove_indentation(code):
+    return code.replace('    ', '')  
 
 def remove_indentation_and_newlines(code):
     return ''.join(code.splitlines()).replace('    ', '')  # 4 spaces indent assumed

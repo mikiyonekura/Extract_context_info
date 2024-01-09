@@ -1,4 +1,5 @@
 import csv
+import function
 from collections import defaultdict
 csv.field_size_limit(1000000000)
 
@@ -8,6 +9,8 @@ with open('final_replication_dataset_v2 2.csv', 'r') as file:
     reader = csv.reader(file, delimiter=';')
     for row in reader:
         under_block = row[20]
+        # インデントのみを削除
+        under_block = function.remove_indentation(under_block)
         context_info.append(under_block)
 
 # 重複削除のための格納変数

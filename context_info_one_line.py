@@ -16,7 +16,7 @@ tmp = ""
 lists = []
 
 # under_blockの最初の行を保存するファイルを開く
-with open('./output_file/first_under_block.txt', 'w') as f_under:
+with open('./output_file/one_under_block.txt', 'w') as f_under:
     for i in range(len(context_info)):
         if tmp != context_info[i] and len(context_info[i]) > 10:
             # under_blockの最初の行を抽出して保存

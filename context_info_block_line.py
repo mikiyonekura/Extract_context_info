@@ -18,6 +18,8 @@ with open('final_replication_dataset_v2 2.csv', 'r') as file:
         satd_comment = row[17]
         above_code = row[19]
         under_block = row[20]
+        # 正解ラベル
+        label = row[18]
 
         # インデントや改行を削除
         satd_comment = function.remove_indentation_and_newlines(satd_comment)
@@ -27,6 +29,7 @@ with open('final_replication_dataset_v2 2.csv', 'r') as file:
         context_info["satd_comment"].append(satd_comment)
         context_info["above_code"].append(above_code)
         context_info["under_block"].append(under_block)
+        context_info["label"].append(label)
 
 
 # 重複削除のための格納変数
@@ -35,7 +38,7 @@ tmp = ""
 lists = []
 
 # ファイルを書き込みモードで開く
-with open('./output_file/under_block_line.txt', 'w') as f:
+with open('./output_file/all_under_block.txt', 'w') as f:
     # ファイルにテキストを書き込む
     for i in range(context_info['under_block'].__len__()):
 
@@ -55,3 +58,16 @@ with open('./output_file/above_code_line.txt', 'w') as f:
     # ファイルにテキストを書き込む
     for i in lists:
         f.write(context_info['above_code'][i] + "\n")
+
+with open('./output_file/label.txt', 'w') as f:
+    # ファイルにテキストを書き込む
+    count = {}
+    for i in lists:
+        if context_info['label'][i] == 'WITHOUT_CLASSIFICATION':
+            f.write('0' + "\n")
+            count['0'] = count.get('0', 0) + 1
+        else:
+            f.write('1' + "\n")
+            count['1'] = count.get('1', 0) + 1
+
+    print(count)
